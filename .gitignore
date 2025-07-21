@@ -1,0 +1,45 @@
+# Python/Django
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+*.db
+db.sqlite3
+*.sqlite3
+*.log
+*.pid
+*.seed
+*.pickle
+
+# Environment variables
+.env
+*.env
+
+# Virtual environment
+venv/
+env/
+.venv/
+ENV/
+
+# Django static and media files
+staticfiles/
+media/
+
+# Logs
+logs/
+debug.log
+
+# IDE and editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Build and deployment
+*.swp
+*.bak
+*.tmp

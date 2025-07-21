@@ -1,0 +1,262 @@
+{% load static %}
+{% load cloudinary %}
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bibiartisan Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.0/css/boxicons.min.css" integrity="sha512-pVCM5+SN2+qwj36KonHToF2p1oIvoU3bsqxphdOIWMYmgr4ZqD3t5DjKvvetKhXGc/ZG5REYTT6ltKfExEei/Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'website/css/style.css' %}">
+    <script src="{% static 'website/js/script.js' %}" defer></script>
+</head>
+<body>
+    <!-- Messages -->
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="alert {% if message.tags == 'success' %}success-message{% else %}error-message{% endif %} fade-in">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- Navbar -->
+    <header class="nav-header">
+        <div class="nav-container">
+            <a href="{% url 'home' %}" class="site-logo">
+                <img src="{% static 'website/images/logo.png' %}" alt="Bibiartisan Logo">
+            </a>
+            <nav class="nav-links" id="navLinks">
+                <a href="#home" data-href="home" class="active">Home</a>
+                <a href="#about" data-href="about">About</a>
+                <a href="#services" data-href="services">Services</a>
+                <a href="#collection" data-href="collection">Collection</a>
+                <a href="#testimonials" data-href="testimonials">Testimonials</a>
+                <a href="#"  id="showDialog">Marketplace</a>
+                <a href="#contact" data-href="contact">Contact</a>
+            </nav>
+            <div class="header-actions">
+                <button class="toggle-dark"><i class="fa-solid fa-moon"></i></button>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        <div class="nav-overlay" id="navOverlay"></div>
+        <div class="overlay" id="overlay"></div>
+        <dialog id="marketplaceDialog" class="modal">
+            <button id="closeDialog">
+                <i class="bx bx-x"></i>
+            </button>
+            <h2>Marketplace coming soon</h2>
+        </dialog>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section fade-in">
+      <img src="{% static 'website/images/hero-bg.jpg' %}" alt="Bibiartisan Hero" class="hero-bg">
+      <div class="hero-container">
+        <h1 class="hero-tagline">
+          {% comment %} <span>Bibiartisan</span>
+          <span>Timeless Fashion, Masterfully Crafted</span> {% endcomment %}
+          <img src="{% static 'website/images/stitches.png' %}" />
+        </h1>
+        <div class="hero-ctas">
+          <a href="#collection" class="btn btn-transparent">Discover Now</a>
+          <a href="#contact" class="btn">Consultation</a>
+        </div>
+      </div>
+    </section>
+    <!-- About Section -->
+    <section class="about-brand fade-in" id="about">
+        <h2>About the Brand</h2>
+        <div class="about-container">
+            <div class="about-text">
+                <h3>Our Story</h3>
+                <p>Bibiartisan is dedicated to crafting bespoke, luxurious tailoring that blends timeless elegance with modern sophistication. Our artisans bring passion and precision to every stitch, ensuring unparalleled quality.</p>
+                <div class="about-values">
+                    {% for value in about_values %}
+                        <span>{{ value }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="about-image">
+                {% if about_images %}
+                    <div class="image-container">
+                        {% for image in about_images %}
+                            <img src="{{ image.image.url }}" alt="{{ image.alt_text|default:'About Bibiartisan' }}" class="rotating-image" data-index="{{ forloop.counter0 }}" style="display: {% if forloop.first %}block{% else %}none{% endif %};">
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p>No image available.</p>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services fade-in">
+        <h2>Our Services</h2>
+        <div class="services-list">
+            <div class="service-item">
+                <i class="fas fa-tshirt"></i>
+                <div class="service-content">
+                    <h3>Ready to Wear</h3>
+                    <p>High-quality, off-the-rack designs tailored for immediate elegance.</p>
+                </div>
+            </div>
+            <div class="service-item">
+                <i class="fas fa-users"></i>
+                <div class="service-content">
+                    <h3>Asoebi</h3>
+                    <p>Custom Asoebi outfits crafted for vibrant celebrations and unity.</p>
+                </div>
+            </div>
+            <div class="service-item">
+                <i class="fas fa-suitcase"></i>
+                <div class="service-content">
+                    <h3>Corporates</h3>
+                    <p>Professional suits and attire designed for corporate excellence.</p>
+                </div>
+            </div>
+            <div class="service-item">
+                <i class="fas fa-ring"></i>
+                <div class="service-content">
+                    <h3>Bridal</h3>
+                    <p>Bespoke bridal gowns tailored to your dream wedding vision.</p>
+                </div>
+            </div>
+            <div class="service-item">
+                <i class="fas fa-magic"></i>
+                <div class="service-content">
+                    <h3>Styling</h3>
+                    <p>Personalized styling services to enhance your unique look.</p>
+                </div>
+            </div>
+            <div class="service-item">
+                <i class="fas fa-gem"></i>
+                <div class="service-content">
+                    <h3>Fabric Beading</h3>
+                    <p>Exquisite beading to add luxury and detail to your fabrics.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collection Section -->
+    <section id="collection" class="collection fade-in">
+        <h2>Our Collection</h2>
+        <div class="collection-grid">
+            {% for collection in collections %}
+                <div class="collection-item">
+                    {% if collection.image %}
+                        <img src="{% cloudinary_url collection.image.public_id %}" alt="{{ collection.category }} Collection">
+                    {% endif %}
+                    <div class="collection-label">{{ collection.category }}</div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials fade-in">
+        <h2>Our Clients</h2>
+        <div class="testimonial-grid">
+            {% for testimonial in testimonials %}
+                <div class="testimonial-item">
+                    {% if testimonial.video %}
+                        <video class="testimonial-video" controls>
+                            <source src="{{ testimonial.video.url }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="play-button"><i class="fa-solid fa-play"></i></div>
+                        <div class="fullscreen-button"><i class="fa-solid fa-expand"></i></div>
+                        <div class="testimonial-info">
+                            <span class="name">{{ testimonial.name }}</span>
+                            {% if testimonial.description %}
+                                <span class="description">{{ testimonial.description }}</span>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
+            {% empty %}
+                <p>No testimonials available yet.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact fade-in">
+        <div class="contact-form">
+            <h2>Contact Us</h2>
+            <form method="POST" action="{% url 'home' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="text" id="phone" name="phone">
+                </div>
+                <div class="form-group">
+                    <label for="request-type">Type of Request</label>
+                    <select id="request-type" name="request-type" required>
+                        <option value="" disabled selected>Select an option</option>
+                        <option value="custom">Custom Order</option>
+                        <option value="alteration">Alteration</option>
+                        <option value="consultation">Consultation</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <button type="submit" class="btn">Send Inquiry</button>
+            </form>
+            <div class="social-icons">
+                <a href="https://wa.me/+2349065765247" target="_blank" title="WhatsApp" aria-label="Contact us on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.instagram.com/bibi_artisan_collection" target="_blank" title="Instagram" aria-label="Follow us on Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@bibiartisancollection" target="_blank" title="TikTok" aria-label="Follow us on TikTok"><i class="fab fa-tiktok"></i></a>
+                <a href="https://www.facebook.com/blessing.udoh.242998" target="_blank" title="Facebook" aria-label="Follow us on Facebook"><i class="fab fa-facebook-f"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Bibiartisan. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const showDialog = document.getElementById('showDialog');
+        const closeDialog = document.getElementById('closeDialog');
+        const dialog = document.getElementById('marketplaceDialog');
+        const overlay = document.getElementById('overlay');
+
+        showDialog.addEventListener('click', (e) => {
+            e.preventDefault();
+            dialog.showModal();
+            overlay.style.display = 'block';
+        });
+
+        closeDialog.addEventListener('click', () => {
+            dialog.close();
+            overlay.style.display = 'none';
+        });
+
+        overlay.addEventListener('click', () => {
+            dialog.close();
+            overlay.style.display = 'none';
+        });
+    
+    </script>
+</body>
+</html>
