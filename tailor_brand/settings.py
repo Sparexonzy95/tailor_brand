@@ -13,7 +13,7 @@ LOG_DIR.mkdir(exist_ok=True)
 
 # Security settings
 SECRET_KEY = config('SECRET_KEY', default='your-fallback-secret-key-for-local-dev-only')
-DEBUG = config('DEBUG', default=True, cast=bool)
+DEBUG = config('DEBUG', default=False, cast=bool)
 ENVIRONMENT = config('ENVIRONMENT', default='development')
 
 ALLOWED_HOSTS = config(
