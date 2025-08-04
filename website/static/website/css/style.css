@@ -1200,12 +1200,46 @@ dialog::backdrop {
 
 /* Footer */
 footer {
-  background: var(--footer-bg);
-  padding: clamp(1.2rem, 3.5vw, 1.8rem);
+  background: var(--footer-bg); /* Uses #5c4314 (dark) or #ead1a2 (light) based on theme */
+  padding: clamp(1.5rem, 4vw, 2rem); /* Slightly more padding for balance */
   text-align: center;
-  color: var(--text);
-  font-size: clamp(0.8rem, 1.6vw, 0.9rem);
-  font-family: 'Nunito', sans-serif;
+  color: var(--text); /* Matches text color: #f4e8d0 (dark) or #2e210a (light) */
+  font-size: clamp(0.85rem, 1.8vw, 0.95rem); /* Consistent with your font sizing */
+  font-family: 'Nunito', sans-serif; /* Matches your body font */
+  border-top: 2px solid var(--accent); /* Accent border (#b98729) for visual pop */
+  box-shadow: 0 -2px 8px rgba(138, 101, 31, 0.2); /* Subtle shadow consistent with your design */
+  transition: background 0.3s ease, color 0.3s ease; /* Smooth theme transition */
+  width: 100%;
+}
+
+/* Footer Paragraph */
+footer p {
+  margin: 0; /* Remove default margin for clean layout */
+  line-height: 1.6; /* Matches your body line-height for consistency */
+}
+
+/* Footer Link Styling */
+footer a {
+  color: var(--tint-light); /* Uses #d5a345 for a warm, highlighted link */
+  text-decoration: none; /* No default underline */
+  font-weight: 600; /* Slightly bold, matching nav-links */
+  transition: color 0.3s ease, border-bottom 0.3s ease; /* Smooth hover effect */
+  border-bottom: 1px solid transparent; /* Prepares for hover underline */
+  font-family: 'Nunito', sans-serif; /* Consistent font */
+}
+
+/* Hover Effect for Link */
+footer a:hover {
+  color: var(--accent); /* Changes to #b98729 on hover for contrast */
+  border-bottom: 1px solid var(--accent); /* Subtle underline on hover */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 576px) {
+  footer {
+    padding: clamp(1rem, 3vw, 1.5rem); /* Reduced padding for mobile */
+    font-size: clamp(0.75rem, 1.5vw, 0.85rem); /* Smaller font for mobile */
+  }
 }
 
 /* Additional Responsive Adjustments */
