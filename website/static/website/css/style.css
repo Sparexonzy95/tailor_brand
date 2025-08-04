@@ -449,6 +449,7 @@ h2 {
 }
 
 .btn-transparent{
+  order: 2;
   background: transparent;
   color: #f1e1c3;
   border: 1px solid #f4f4cd;
