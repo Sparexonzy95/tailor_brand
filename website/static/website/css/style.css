@@ -975,11 +975,12 @@ dialog::backdrop {
   justify-items: center;
 }
 
+/* Testimonials Section */
 .testimonial-item {
   position: relative;
   width: 100%;
-  height: clamp(220px, 32vw, 300px);
-  border: 3px solid var(--tint-soft);
+  height: clamp(220px, 32vw, 300px); /* Existing height for larger screens */
+  border: 3px solid var(--tint-soft); /* #dfba74 */
   border-radius: 10px;
   overflow: hidden;
   transition: box-shadow 0.3s ease;
@@ -988,8 +989,29 @@ dialog::backdrop {
 .testimonial-item video {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  background: #000;
+  object-fit: cover; /* Ensures video fills container, cropping as needed */
+  background: #000; /* Fallback background */
+  display: block; /* Ensures no extra spacing */
+}
+
+/* Mobile View Adjustments */
+@media (max-width: 576px) {
+  .testimonial-grid {
+    grid-template-columns: 1fr; /* Existing: ensures single column */
+  }
+  .testimonial-item {
+    height: clamp(200px, 50vw, 280px); /* Adjusted height for better mobile fit */
+    aspect-ratio: 16 / 9; /* Enforce a consistent aspect ratio */
+    overflow: hidden; /* Ensure no overflow */
+  }
+  .testimonial-item video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Reinforce cover to fill container */
+    position: absolute; /* Ensure video fills the container */
+    top: 0;
+    left: 0;
+  }
 }
 
 .testimonial-item video:fullscreen {
